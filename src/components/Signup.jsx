@@ -24,12 +24,16 @@ function Signup() {
             gender:gender,
             email:email,
             age:age,
-            password:password
+            password:password,
+
         }
    
 
        
-            let response=await signup(formdata)
+            let response = await signup(formdata)
+            if(response.status===200){
+                navigate("/login")
+            }
             
             console.log(response);
             
