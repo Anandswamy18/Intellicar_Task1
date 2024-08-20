@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
-import "./Login.css"
+import {login} from "../services/UserServices"
 import { useState } from "react";
+
+import "./Login.css"
 
 
 
@@ -10,14 +12,23 @@ export default function Login() {
     const [email,setEMail]=useState("")
     const [password,setPassword]=useState("")
 
-    const handleLoginSUbmit = ()=>{
+    const handleLoginSUbmit = async(e)=>{
+        e.preventDefault()
 
         const loginData={
             email:email,
             password:password
         }
 
-        console.log(loginData);
+       let response = await login(loginData)
+       console.log(response);
+       
+       const accessToken = response.data.token;
+       localStorage.setItem("token", accessToken);
+       console.log(response);
+       
+
+
         
 
     }

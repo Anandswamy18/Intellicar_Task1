@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
-
+import {signup} from "../services/UserServices"
 
 function Signup() {
 
@@ -12,13 +12,13 @@ function Signup() {
     const [email, setEmail] = useState('');
     const [age, setAge] = useState('');
     const [password, setPassword] = useState('');
-    const naviagate=useNavigate()
+    const navigate=useNavigate()
 
 
-    const handleSignupSubmit = () => {
-
+    const handleSignupSubmit =  async(e) => {
+        e.preventDefault()
         console.log('Signup:', { username, mobile, gender, email, age, password });
-        const foemdata={
+        const formdata={
             username:username,
             mobile:mobile,
             gender:gender,
@@ -26,7 +26,14 @@ function Signup() {
             age:age,
             password:password
         }
-    //    naviagate("/login")
+   
+
+       
+            let response=await signup(formdata)
+            
+            console.log(response);
+            
+        
     };
     return (
         
